@@ -15,6 +15,7 @@ function LeftColumn(MantellaMCM mcm, MantellaRepository Repository) global
     mcm.oid_showReminderMessages = mcm.AddToggleOption("Show Input Reminder Messages", repository.showReminderMessages)
 
     mcm.AddHeaderOption("Controls")
+    mcm.oid_enableVanillaDialogueAwareness = mcm.AddToggleOption("Enable Vanilla Dialogue Awareness", repository.enableVanillaDialogueAwareness)
     mcm.oid_keymapStartAddHotkey = mcm.AddKeyMapOption("Start Conversation / Add NPC", repository.MantellaStartHotkey)
     mcm.oid_keymapPromptHotkey = mcm.AddKeyMapOption("Open Text Prompt", repository.MantellaListenerTextHotkey)
     mcm.oid_keymapEndHotkey = mcm.AddKeyMapOption("End Conversation / Remove NPC", repository.MantellaEndHotkey)
@@ -157,5 +158,8 @@ function OptionUpdate(MantellaMCM mcm, int optionID, MantellaRepository Reposito
     elseIf optionID == mcm.oid_NPCPackageToggle
         Repository.NPCPackage =! Repository.NPCPackage
         mcm.SetToggleOptionValue(mcm.oid_NPCPackageToggle, Repository.NPCPackage)
+    elseIf optionID == mcm.oid_enableVanillaDialogueAwareness
+        Repository.enableVanillaDialogueAwareness =! Repository.enableVanillaDialogueAwareness
+        mcm.SetToggleOptionValue(mcm.oid_enableVanillaDialogueAwareness, Repository.enableVanillaDialogueAwareness)
     endif
 endfunction
