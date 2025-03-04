@@ -108,6 +108,8 @@ function StartConversation(Actor[] actorsToStartConversationWith)
     if (eventHandle)        
         ModEvent.Send(eventHandle)
     endIf 
+
+    repository.ReduceNPCChatter()
     MantellaVanillaDialogue.notifyConversationStart()
 endFunction
 
@@ -370,6 +372,7 @@ Function CleanupConversation()
     if (handle)        
         ModEvent.Send(handle)
     endIf 
+    repository.ResetGameVariables()
     MantellaVanillaDialogue.notifyConversationEnd()
     Debug.Notification("Conversation ended.")  
     Stop()

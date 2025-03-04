@@ -7,3 +7,5 @@
 *.pex
 SKSE/Plugins/MantellaSoftware/
 GPT_SECRET_KEY.txt
+Scripts/Source/*.ppj
+Scripts/Source/.vscode

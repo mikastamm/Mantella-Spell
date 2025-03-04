@@ -320,3 +320,64 @@ Event OnKeyDown(int KeyCode)
         endIf
     endIf
 endEvent
+
+; ######################################################################################
+;
+; Game variable clipboard
+; -> We change them in conversations and store the original values here to reset them later    
+
+float Property original_fAIGreetingTimer Auto   
+float Property original_fAIMinGreetingDistance Auto
+float Property original_fAISocialRadiusToTriggerConversation Auto
+float Property original_fAISocialRadiusToTriggerConversationInterior Auto   
+float Property original_fAISocialchanceForConversation Auto
+float Property original_fAISocialchanceForConversationInterior Auto
+float Property original_fCombatDialogueTauntMinElapsedTime Auto
+float Property original_fCommentOnPlayerKnockingThings Auto
+float Property original_fIdleChatterCommentTimer Auto
+float Property original_fIdleChatterCommentTimerMax Auto
+bool Property hasSavedGameVariables Auto 
+
+function ReduceNPCChatter()
+    StoreOriginalGameVariables()
+    Game.SetGameSettingFloat("fAIGreetingTimer", 120)
+    Game.SetGameSettingFloat("fAIMinGreetingDistance", 0)
+    Game.SetGameSettingFloat("fAISocialRadiusToTriggerConversation", 0)
+    Game.SetGameSettingFloat("fAISocialRadiusToTriggerConversationInterior", 0)
+    Game.SetGameSettingFloat("fAISocialchanceForConversation", 0)
+    Game.SetGameSettingFloat("fAISocialchanceForConversationInterior", 0)
+    Game.SetGameSettingFloat("fCombatDialogueTauntMinElapsedTime", 30)
+    Game.SetGameSettingFloat("fCommentOnPlayerKnockingThings", 30)
+    Game.SetGameSettingFloat("fIdleChatterCommentTimer", 60)
+    Game.SetGameSettingFloat("fIdleChatterCommentTimerMax", 120)
+endfunction
+
+function StoreOriginalGameVariables()
+    original_fAIGreetingTimer = Game.GetGameSettingFloat("fAIGreetingTimer")
+    original_fAIMinGreetingDistance = Game.GetGameSettingFloat("fAIMinGreetingDistance")
+    original_fAISocialRadiusToTriggerConversation = Game.GetGameSettingFloat("fAISocialRadiusToTriggerConversation")
+    original_fAISocialRadiusToTriggerConversationInterior = Game.GetGameSettingFloat("fAISocialRadiusToTriggerConversationInterior")
+    original_fAISocialchanceForConversation = Game.GetGameSettingFloat("fAISocialchanceForConversation")
+    original_fAISocialchanceForConversationInterior = Game.GetGameSettingFloat("fAISocialchanceForConversationInterior")
+    original_fCombatDialogueTauntMinElapsedTime = Game.GetGameSettingFloat("fCombatDialogueTauntMinElapsedTime")
+    original_fCommentOnPlayerKnockingThings = Game.GetGameSettingFloat("fCommentOnPlayerKnockingThings")
+    original_fIdleChatterCommentTimer = Game.GetGameSettingFloat("fIdleChatterCommentTimer")
+    original_fIdleChatterCommentTimerMax = Game.GetGameSettingFloat("fIdleChatterCommentTimerMax")
+    hasSavedGameVariables = true
+endFunction
+
+function ResetGameVariables()
+    if !hasSavedGameVariables
+        return
+    endif
+    Game.SetGameSettingFloat("fAIGreetingTimer", original_fAIGreetingTimer)
+    Game.SetGameSettingFloat("fAIMinGreetingDistance", original_fAIMinGreetingDistance)
+    Game.SetGameSettingFloat("fAISocialRadiusToTriggerConversation", original_fAISocialRadiusToTriggerConversation)
+    Game.SetGameSettingFloat("fAISocialRadiusToTriggerConversationInterior", original_fAISocialRadiusToTriggerConversationInterior)
+    Game.SetGameSettingFloat("fAISocialchanceForConversation", original_fAISocialchanceForConversation)
+    Game.SetGameSettingFloat("fAISocialchanceForConversationInterior", original_fAISocialchanceForConversationInterior)
+    Game.SetGameSettingFloat("fCombatDialogueTauntMinElapsedTime", original_fCombatDialogueTauntMinElapsedTime)
+    Game.SetGameSettingFloat("fCommentOnPlayerKnockingThings", original_fCommentOnPlayerKnockingThings)
+    Game.SetGameSettingFloat("fIdleChatterCommentTimer", original_fIdleChatterCommentTimer)
+    Game.SetGameSettingFloat("fIdleChatterCommentTimerMax", original_fIdleChatterCommentTimerMax)
+endFunction
